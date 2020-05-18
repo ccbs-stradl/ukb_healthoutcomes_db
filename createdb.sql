@@ -1,14 +1,14 @@
--- Import record-level tables
+-- Tables for underlying text representation of downloaded tables
 
 -- schema
-CREATE TABLE gp_registrations(
+CREATE TABLE gp_registrations_txt(
   "eid" INTEGER,
   "data_provider" INTEGER,
   "reg_date" TEXT,
   "deduct_date" TEXT
 );
 
-CREATE TABLE gp_clinical(
+CREATE TABLE gp_clinical_txt(
   "eid" INTEGER,
   "data_provider" INTEGER,
   "event_dt" TEXT,
@@ -19,7 +19,7 @@ CREATE TABLE gp_clinical(
   "value3" TEXT
 );
 
-CREATE TABLE gp_scripts(
+CREATE TABLE gp_scripts_txt(
  "eid" INTEGER,
  "data_provider" INTEGER,
  "issue_date" TEXT,
@@ -30,7 +30,7 @@ CREATE TABLE gp_scripts(
  "quantity" TEXT
 );
 
-CREATE TABLE hesin(
+CREATE TABLE hesin_txt(
 	"eid" INTEGER,
 	"ins_index" INTEGER,
 	"dsource" TEXT,
@@ -76,7 +76,7 @@ CREATE TABLE hesin(
 	UNIQUE (eid, ins_index)
 );
 
-CREATE TABLE hesin_diag(
+CREATE TABLE hesin_diag_txt(
 	"eid" INTEGER,
 	"ins_index" INTEGER,
 	"arr_index" INTEGER,
@@ -88,7 +88,7 @@ CREATE TABLE hesin_diag(
 	UNIQUE (eid, ins_index, arr_index)
 );
 
-CREATE TABLE hesin_oper(
+CREATE TABLE hesin_oper_txt(
 	"eid"	INTEGER,
 	"ins_index" INTEGER,
 	"arr_index"	INTEGER,
@@ -103,7 +103,7 @@ CREATE TABLE hesin_oper(
 	UNIQUE (eid, ins_index, arr_index)
 );
 
-CREATE TABLE hesin_psych(
+CREATE TABLE hesin_psych_txt(
 	"eid" INTEGER,
 	"ins_index" INTEGER,
 	"detncat" INTEGER,
@@ -114,7 +114,7 @@ CREATE TABLE hesin_psych(
 	UNIQUE (eid, ins_index)
 );
 
-CREATE TABLE hesin_maternity(
+CREATE TABLE hesin_maternity_txt(
 	"eid" INTEGER,
 	"ins_index" INTEGER,
 	"numbaby" INTEGER,
@@ -132,7 +132,7 @@ CREATE TABLE hesin_maternity(
 	UNIQUE(eid, ins_index)
 );
 
-CREATE TABLE hesin_delivery(
+CREATE TABLE hesin_delivery_txt(
 	"eid" INTEGER,
 	"ins_index" INTEGER,
 	"arr_index" INTEGER,

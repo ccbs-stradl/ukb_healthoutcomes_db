@@ -40,20 +40,25 @@ Assuming you have requested the relevant fields for the record-level health outc
 
 # Database creation
 
-Move the downloaded text files into the repository directory. They are expected to have the names given to them in the `wget` command (of the form `table_name.txt`). If the tables have different names, are in different locations, or are not available, modify the `importdata.sql` file as appropriate.
+Move the downloaded text files into the repository directory. They are expected to have the names given to them in the `wget` command (of the form `table_name.txt`). If the tables have different names, are in different locations, or are not available, modify the `importdata.sql` file as appropriate.  
 
 Create the database file
 ```
 sqlite3 healthoutcomes.db
 ```
 
-In the `sqlite>` prompt, create the database tables and load the data:
+In the `sqlite>` prompt, create the database tables, load the data files, and create table views:
 
 ```
 .read createdb.sql
 .read importdata.sql
+.read viewdb.sql
 .quit
 ```
+
+The database has two versions of each table: storage of the underlying textual representation of the data-as-downloaded called `table_name_txt` and an interpreted view of the data called `table_name` that peforms munging like [reformat dates](https://www.sqlite.org/lang_datefunc.html) so that they can be used in database queries.
+
+The total size of the SQL database file is approximately 10GB.
 
 # Working with the data
 
@@ -72,7 +77,23 @@ con <- DBI::dbConnect(RSQLite::SQLite(), 'healthoutcomes.db')
 hesin <- tbl(con, 'hesin')
 ```
 
-The `hesin` table can then be worked on using dplyr commands like any other `tibble`. Use `select()`, `filter()`, and `summarize()` commands to identify the subset of the data, or transform it by passing expressions with SQL functions to `mutate()`. Once your query is put together, use `collect()` to import the final table into the R workspace for further manipulation or modeling. 
+The `hesin` table can then be worked on using dplyr commands like any other `tibble`. Use `select()`, `filter()`, and `summarize()` commands to identify the subset of the data, or transform it by passing expressions with SQL functions to `mutate()`. Once your query is finalized together, use `collect()` to import the query into the R workspace for further manipulation or modeling. 
+
+## Date information
+
+The health outcomes data tables have date information formatted as either `YYYYMMDD` or `DD-MM-YYYY` so these have been normalized to `YYYY-MM-DD` so that they can be passed to [SQLite's date functions](https://www.sqlite.org/lang_datefunc.html). 
+
+```
+gp_registrations <- tbl(con, 'gp_registrations')
+gp_clinical <- tbl(con, 'gp_clinical')
+
+# Return all registrations from October 2016
+gp_registrations %>% filter(reg_date >= '2016-10-1' & reg_date <= '2016-10-31') %>% arrange(reg_date)
+
+# count how many clinical records are available for each year
+gp_clinical %>% group_by(date(event_dt, 'start of year')) %>% tally()
+
+``` 
 
 ## Issues
 
@@ -90,11 +111,6 @@ When filtering in dplyr, use, e.g. `!=''` instead of `!is.na`. For example, find
 ```
 hesin %>% filter(speldur != '')
 ```
-
-### Dates
-
-Dates are encoded as strings of the format `YYYYMMDD` or `DD/MM/YYYY`.
-
 
 ### Codings
 

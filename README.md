@@ -1,10 +1,10 @@
-# UK Biobank Record Level Health-related Outcomes Database
+# UK Biobank Record Level Health-related Outcomes Database Tools
 
 Commands to load record-level access [Health-related outcomes](http://biobank.ndph.ox.ac.uk/showcase/label.cgi?id=3001) tables into an [SQLite](https://www.sqlite.org) database. Data must be requested from UK Biobank and downloaded as database tables from the Data Portal.
 
 # Introduction
 
-The health outcomes data tables in UKB can be upwards of 4GB in size and therefore can be memory-intensive to work with. By storing the data tables in a database, it is possible to query them without loading all of the data into memory.
+The health outcomes data tables in UKB can each be upwards of 4GB in size and therefore are memory-intensive to work with. By storing the data tables in a database, it is possible to query them without loading all of the data into memory.
 
 ## List of database tables
 
@@ -25,7 +25,7 @@ The health outcomes data tables in UKB can be upwards of 4GB in size and therefo
 
 ## Downloading the database tables
 
-Assuming you have requested the relevant fields for the record-level health outcomes data, the full database tables can be downloaded (in tab-separated text format) from the [UKB Data Showcase](http://biobank.ndph.ox.ac.uk/showcase/)
+Assuming you have requested the relevant fields for the record-level health outcomes data as part of an approved UKB application, the full database tables can be downloaded (in tab-separated text format) from the [UKB Data Showcase](http://biobank.ndph.ox.ac.uk/showcase/)
 
 1. Log in to the [AMS Portal](https://bbams.ndph.ox.ac.uk/ams/)
 2. Select the **Projects** tab

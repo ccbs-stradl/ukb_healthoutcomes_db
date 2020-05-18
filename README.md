@@ -4,7 +4,7 @@ Commands to load record-level access [Health-related outcomes](http://biobank.nd
 
 # Introduction
 
-The health outcomes data tables in UKB can be upwards of 4GB in size and therefore can be memory-intensive to work with. My storing the data tables in a database, it is possible to query them without loading all of the data into memory.
+The health outcomes data tables in UKB can be upwards of 4GB in size and therefore can be memory-intensive to work with. By storing the data tables in a database, it is possible to query them without loading all of the data into memory.
 
 ## List of database tables
 
@@ -72,7 +72,7 @@ con <- DBI::dbConnect(RSQLite::SQLite(), 'healthoutcomes.db')
 hesin <- tbl(con, 'hesin')
 ```
 
-The `hesin` table can then be worked on using dplyr commands like any other `tibble`.
+The `hesin` table can then be worked on using dplyr commands like any other `tibble`. Use `select()`, `filter()`, and `summarize()` commands to identify the subset of the data, or transform it by passing expressions with SQL functions to `mutate()`. Once your query is put together, use `collect()` to import the final table into the R workspace for further manipulation or modeling. 
 
 ## Issues
 

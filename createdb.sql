@@ -72,7 +72,7 @@ CREATE TABLE hesin(
 	"dismeth" INTEGER,
 	"disdest_uni" INTEGER,
 	"disdest" INTEGER,
-	"carersi" INTEGER
+	"carersi" INTEGER,
 	UNIQUE (eid, ins_index)
 );
 
@@ -84,7 +84,7 @@ CREATE TABLE hesin_diag(
 	"diag_icd9" TEXT,
 	"diag_icd9_nb" TEXT,
 	"diag_icd10" TEXT,
-	"diag_icd10_nb" TEXT
+	"diag_icd10_nb" TEXT,
 	UNIQUE (eid, ins_index, arr_index)
 );
 

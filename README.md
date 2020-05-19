@@ -50,9 +50,9 @@ sqlite3 healthoutcomes.db
 In the `sqlite>` prompt, create the database tables, load the data files, and create table views:
 
 ```
-.read createdb.sql
-.read importdata.sql
-.read viewdb.sql
+.read data.sql
+.read import.sql
+.read views.sql
 .quit
 ```
 

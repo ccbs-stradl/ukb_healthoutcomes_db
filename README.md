@@ -59,7 +59,7 @@ In the `sqlite>` prompt, create the database tables, load the data files, create
 
 The database has two versions of each table: storage of the underlying textual representation of the data-as-downloaded called `table_name_txt` and an interpreted view of the data called `table_name` that peforms munging like [reformat dates](https://www.sqlite.org/lang_datefunc.html) so that they can be used in database queries.
 
-The total size of the SQL database file is approximately 10GB.
+The total size of the SQL database file is approximately 25GB (10GB of data and 15GB of indices).
 
 # Working with the data
 

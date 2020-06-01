@@ -47,12 +47,13 @@ Create the database file
 sqlite3 healthoutcomes.db
 ```
 
-In the `sqlite>` prompt, create the database tables, load the data files, and create table views:
+In the `sqlite>` prompt, create the database tables, load the data files, create table views, and add indices:
 
 ```
 .read data.sql
 .read import.sql
 .read views.sql
+.read index.sql
 .quit
 ```
 

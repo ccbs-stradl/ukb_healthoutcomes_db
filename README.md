@@ -96,6 +96,18 @@ gp_clinical %>% group_by(date(event_dt, 'start of year')) %>% tally()
 
 ``` 
 
+
+## Searching by Drug Name
+
+Prescriptions are referred to in `gp_scripts` table are variously coded with Read v2, BNF, or DMD codes depending on the data source. Many entries also have a plain text name of the drug in the `drug_name` column (along with dosage size information). The drug name can be searched using the `%LIKE%` operator and with the name of the drug surrounded by `"%%"`.
+
+```
+
+gp_scripts <- tbl(con, 'gp_scripts')
+gp_scripts %>% filter(drug_name %LIKE% "%Amitriptyline%") 
+
+```
+
 ## Issues
 
 ### Missing data

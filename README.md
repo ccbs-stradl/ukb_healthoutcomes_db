@@ -40,7 +40,7 @@ Assuming you have requested the relevant fields for the record-level health outc
 
 # Database creation
 
-Move the downloaded text files into the repository directory. They are expected to have the names given to them in the `wget` command (of the form `table_name.txt`). If the tables have different names, are in different locations, or are not available, modify the `importdata.sql` file as appropriate.  
+Move the downloaded text files into the repository directory. They are expected to have the names given to them in the `wget` command (of the form `table_name.txt`). If the tables have different names, are in different locations, or are not available, modify the `import.sql` file as appropriate.  
 
 Create the database file
 ```

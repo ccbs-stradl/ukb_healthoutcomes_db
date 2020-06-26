@@ -93,3 +93,6 @@ ON hesin_maternity_txt (eid, ins_index);
 
 CREATE INDEX idx_hesin_delivery_txt_eid_ins_index_arr_index
 ON hesin_delivery_txt (eid, ins_index, arr_index);
+
+-- get statistics for the query planner
+ANALYZE;

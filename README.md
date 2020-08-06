@@ -42,24 +42,23 @@ Assuming you have requested the relevant fields for the record-level health outc
 
 Move the downloaded text files into the repository directory. They are expected to have the names given to them in the `wget` command (of the form `table_name.txt`). If the tables have different names, are in different locations, or are not available, modify the `import.sql` file as appropriate.  
 
-Create the database file
+Create the database with
+```
+sh db.sh
+```
+
+The database creation script reads the raw data into the database and then [normalises](https://en.wikipedia.org/wiki/Database_normalization) it into a more compact set of tables to speed up querying.
+
+
+The database is called `healthoutcomes.db` and can be opened using SQLite:
+
 ```
 sqlite3 healthoutcomes.db
 ```
 
-In the `sqlite>` prompt, create the database tables, load the data files, create table views, and add indices:
+The database has end-user views of the data that conform to the table names and columns of the original data. Dates in the tables are standardised to the format `YYYY-MM-DD`.
 
-```
-.read data.sql
-.read import.sql
-.read views.sql
-.read index.sql
-.quit
-```
-
-The database has two versions of each table: storage of the underlying textual representation of the data-as-downloaded called `table_name_txt` and an interpreted view of the data called `table_name` that peforms munging like [reformat dates](https://www.sqlite.org/lang_datefunc.html) so that they can be used in database queries.
-
-The total size of the SQL database file is approximately 25GB (10GB of data and 15GB of indices).
+The total size of the SQL database file is approximately XXGB (XXGB of data and XXGB of indices).
 
 # Working with the data
 
@@ -110,20 +109,6 @@ gp_scripts %>% filter(drug_name %LIKE% "%Amitriptyline%")
 
 ## Issues
 
-### Missing data
-
-Because of the way the way that SQLite can store mixed types in a column, some empty cells  are encoded as empty strings (`''`) rather than as `NULL`/`NA`. This shows up as the warning message
-
-```
-1: In result_fetch(res@ptr, n = n) :
-  Column `COLUMN_NAME`: mixed type, first seen values of type integer, coercing other values of type string
-```
-
-When filtering in dplyr, use, e.g. `!=''` instead of `!is.na`. For example, find rows where spell duration is not missing
-
-```
-hesin %>% filter(speldur != '')
-```
 
 ### Codings
 

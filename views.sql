@@ -1,38 +1,36 @@
--- views with interpreted dates
+-- views reproducing the original non-normalised data
 
--- use substr() to extract each part (year, month, day), then append together
--- in YYYY-MM-DD format, then pass to the date() function
 
 CREATE VIEW gp_registrations AS
-SELECT eid,
-	   date(substr(reg_date, 7, 4) || '-' ||
-	        substr(reg_date, 4, 2) || '-' ||
-	        substr(reg_date, 1, 2)) AS reg_date,
-	   date(substr(deduct_date, 7, 4) || '-' ||
-		    substr(deduct_date, 4, 2) || '-' ||
-		    substr(deduct_date, 1, 2)) AS deduct_date
+SELECT eid, data_provider,
+	   reg_date, deduct_date
 FROM
-gp_registrations_txt;
+gp_registrations_data
+LEFT JOIN eids USING (id);
 
 CREATE VIEW gp_clinical AS
 SELECT
-  eid, data_provider,
-  date(substr(event_dt, 7, 4) || '-' ||
-	     substr(event_dt, 4, 2) || '-' ||
-	     substr(event_dt, 1, 2)) AS event_dt,
+  eid, data_provider, event_dt,
   read_2, read_3, value1, value2, value3
 FROM
-gp_clinical_txt;
+gp_clinical_data
+LEFT JOIN eids USING (id)
+LEFT JOIN gp_clinical_read_2 USING (read_2_id)
+LEFT JOIN gp_clinical_read_3 USING (read_3_id);
 
 CREATE VIEW gp_scripts AS
 SELECT
- eid, data_provider,
- date(substr(issue_date, 7, 4) || '-' ||
-		 substr(issue_date, 4, 2) || '-' ||
-		 substr(issue_date, 1, 2)) AS issue_date,
+ eid, data_provider, issue_date,
  read_2, bnf_code, dmd_code, drug_name, quantity
 FROM
-gp_scripts_txt;
+gp_scripts_data
+LEFT JOIN eids USING(id)
+LEFT JOIN gp_scripts_codes USING (codes_id)
+LEFT JOIN gp_scripts_read_2 USING (read_2_id)
+LEFT JOIN gp_scripts_bnf_code USING (bnf_code_id)
+LEFT JOIN gp_scripts_dmd_code USING (dmd_code_id)
+LEFT JOIN gp_scripts_drug_name USING (drug_name_id);
+
 
 CREATE VIEW hesin AS
 SELECT

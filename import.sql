@@ -21,3 +21,29 @@
 .import '| tail -n +2 hesin_maternity.txt' hesin_maternity_txt
 
 .import '| tail -n +2 hesin_delivery.txt' hesin_delivery_txt
+
+--
+-- EIDs
+--
+
+-- collect all EIDs together 
+INSERT INTO eids
+  SELECT DISTINCT NULL, eid
+    FROM(SELECT eid FROM gp_registrations_txt
+         UNION
+         SELECT eid FROM gp_clinical_txt
+         UNION
+         SELECT eid FROM gp_scripts_txt
+         UNION
+         SELECT eid FROM hesin_txt
+         UNION
+         SELECT eid FROM hesin_delivery_txt
+         UNION
+         SELECT eid FROM hesin_diag_txt
+         UNION
+         SELECT eid FROM hesin_maternity_txt
+         UNION
+         SELECT eid FROM hesin_oper_txt
+         UNION
+         SELECT eid FROM hesin_psych_txt     
+       );

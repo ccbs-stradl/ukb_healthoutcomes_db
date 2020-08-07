@@ -62,7 +62,7 @@ CREATE TABLE hesin_txt(
   "admimeth_uni" INTEGER,
   "admimeth" INTEGER,
   "admisorc_uni" INTEGER,
-  "admisorc" TEXT,
+  "admisorc" INTEGER,
   "firstreg" INTEGER,
   "classpat_uni" INTEGER,
   "classpat" TEXT,

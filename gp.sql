@@ -1,33 +1,6 @@
 -- Tables for normalized data
 PRAGMA foreign_keys = ON;
 
---
--- EIDs
---
-
-
-
--- collect all EIDs together 
-INSERT INTO eids
-  SELECT DISTINCT NULL, eid
-    FROM(SELECT eid FROM gp_registrations_txt
-         UNION
-         SELECT eid FROM gp_clinical_txt
-         UNION
-         SELECT eid FROM gp_scripts_txt
-         UNION
-         SELECT eid FROM hesin_txt
-         UNION
-         SELECT eid FROM hesin_delivery_txt
-         UNION
-         SELECT eid FROM hesin_diag_txt
-         UNION
-         SELECT eid FROM hesin_maternity_txt
-         UNION
-         SELECT eid FROM hesin_oper_txt
-         UNION
-         SELECT eid FROM hesin_psych_txt     
-       );
 
  --
  -- GP Registrations
@@ -213,3 +186,11 @@ LEFT JOIN gp_scripts_bnf_code USING (bnf_code)
 LEFT JOIN gp_scripts_dmd_code USING (dmd_code)
 LEFT JOIN gp_scripts_drug_name USING (drug_name)
 LEFT JOIN gp_scripts_codes USING (read_2_id, bnf_code_id, dmd_code_id, drug_name_id);
+
+---
+--- Clean up raw data
+---
+
+DROP TABLE gp_registrations_txt;
+DROP TABLE gp_clinical_txt;
+DROP TABLE gp_scripts_txt;

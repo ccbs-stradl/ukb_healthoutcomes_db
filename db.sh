@@ -9,3 +9,4 @@ sqlite3 healthoutcomes.db < import.sql
 sqlite3 healthoutcomes.db < gp.sql
 sqlite3 healthoutcomes.db < hesin.sql
 sqlite3 healthoutcomes.db < views.sql
+sqlite3 healthoutcomes.db < index.sql

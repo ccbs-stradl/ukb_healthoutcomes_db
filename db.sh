@@ -20,3 +20,6 @@ sqlite3 healthoutcomes.db < views.sql
 
 echo "Indexing tables"
 sqlite3 healthoutcomes.db < index.sql
+
+echo "Analysing database"
+sqlite3 healthoutcomes.db < analyse.sql

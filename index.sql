@@ -130,5 +130,4 @@ ON hesin_maternity_data (id, ins_index);
 CREATE INDEX idx_hesin_delivery_data_id_ins_index_arr_index
 ON hesin_delivery_data (id, ins_index, arr_index);
 
--- get statistics for the query planner
-ANALYZE;
+

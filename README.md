@@ -6,6 +6,10 @@ Commands to load record-level access [Health-related outcomes](http://biobank.nd
 
 The health outcomes data tables in UKB can each be upwards of 4GB in size and therefore are memory-intensive to work with. By storing the data tables in a database, it is possible to query them without loading all of the data into memory.
 
+### Updates
+
+- Aug 10 2020: Database schema has been [normalised](https://en.wikipedia.org/wiki/Database_normalization) which shoud make many queries a lot faster, particularly those that involve searching text fields. It also decreases the size of the database by about 7GB.
+
 ## List of database tables
 
 ### [Hospital inpatient](http://biobank.ndph.ox.ac.uk/showcase/label.cgi?id=2000)
@@ -113,3 +117,6 @@ gp_scripts %>% filter(drug_name %LIKE% "%Amitriptyline%")
 ### Codings
 
 Many columns are stored as coded integers rather than strings. The [HES Data Dictionary](http://biobank.ndph.ox.ac.uk/showcase/refer.cgi?id=141140) lists the structure of each table and the data coding for each column. Data codings can be searched for on the [UKB Showcase](http://biobank.ndph.ox.ac.uk/showcase/search.cgi) and inspected or downloaded as a text file. For example, the `source` column of the `hesin` table has [Data-Coding 263](http://biobank.ndph.ox.ac.uk/showcase/coding.cgi?id=263).
+
+
+

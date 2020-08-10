@@ -121,6 +121,6 @@ Many columns are stored as coded integers rather than strings. The [HES Data Dic
 
 # Schema
 
-For each table `TABLE` there is an underlying data representation called `TABLE_data` with foreign key links between them using the `eids` table. Most `TEXT` columns (excepting data fields) are normalized to separate tables called `TABLE_FIELD` linked with a foreign key `FIELD_id`.
+For each table `TABLE` there is an underlying data representation called `TABLE_data` with foreign key links between them using the `eids` table. Most `TEXT` columns (excepting date fields) are normalized to separate tables called `TABLE_FIELD` linked with a foreign key `FIELD_id`.
 
 ![Database schema](docs/schema.png)

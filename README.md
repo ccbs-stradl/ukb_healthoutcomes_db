@@ -119,7 +119,7 @@ gp_scripts %>% filter(drug_name %LIKE% "%Amitriptyline%")
 Many columns are stored as coded integers rather than strings. The [HES Data Dictionary](http://biobank.ndph.ox.ac.uk/showcase/refer.cgi?id=141140) lists the structure of each table and the data coding for each column. Data codings can be searched for on the [UKB Showcase](http://biobank.ndph.ox.ac.uk/showcase/search.cgi) and inspected or downloaded as a text file. For example, the `source` column of the `hesin` table has [Data-Coding 263](http://biobank.ndph.ox.ac.uk/showcase/coding.cgi?id=263).
 
 
-## Schema
+# Schema
 
 For each table `TABLE` there is an underlying data representation called `TABLE_data` with foreign key links between them using the `eids` table. Most `TEXT` columns (excepting data fields) are normalized to separate tables called `TABLE_FIELD` linked with a foreign key `FIELD_id`.
 

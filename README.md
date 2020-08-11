@@ -27,6 +27,16 @@ The health outcomes data tables in UKB can each be upwards of 4GB in size and th
 - `gp_scripts`: [GP prescription records](http://biobank.ndph.ox.ac.uk/showcase/field.cgi?id=42039)
 - `gp_registrations`: [GP registration records](http://biobank.ndph.ox.ac.uk/showcase/field.cgi?id=42038)
 
+
+## Installation
+
+- Install [SQLite](https://www.sqlite.org/download.html) version > 3.9.0
+- Clone the repository
+  ```
+  git clone git@github.com:ccbs-stradl/ukb_healthoutcomes_db.git
+  cd ukb_healthoutcomes_db
+  ```
+
 ## Downloading the database tables
 
 Assuming you have requested the relevant fields for the record-level health outcomes data as part of an approved UKB application, the full database tables can be downloaded (in tab-separated text format) from the [UKB Data Showcase](http://biobank.ndph.ox.ac.uk/showcase/)
@@ -40,7 +50,19 @@ Assuming you have requested the relevant fields for the record-level health outc
 7. Click the "Connect" button.
 8. Select the **Table Download** tab.
 9. Enter the name of a table (listed above) to download and click the "Fetch Table" button.
-10. Use the `wget` command to download the table, or click the download link (`wget` is preferred as it names the file correctly. The download link may open the table directly in a browser window, in which case you have to use _Save as..._ to save it).
+10. Use the listed `wget` command with the specified URL key to download the table, or click the download link (`wget` is preferred as it names the file correctly. The download link may open the table directly in a browser window, in which case you have to use _Save as..._ to save it).
+
+```
+wget -nd -Ohesin.txt https://biota.ndph.ox.ac.uk/...
+wget -nd -Ohesin_diag.txt https://biota.ndph.ox.ac.uk/...
+wget -nd -Ohesin_oper.txt https://biota.ndph.ox.ac.uk/...
+wget -nd -Ohesin_psych.txt https://biota.ndph.ox.ac.uk/...
+wget -nd -Ohesin_maternity.txt https://biota.ndph.ox.ac.uk/...
+wget -nd -Ohesin_delivery.txt https://biota.ndph.ox.ac.uk/...
+wget -nd -Ogp_clinical.txt https://biota.ndph.ox.ac.uk/...
+wget -nd -Ogp_scripts.txt https://biota.ndph.ox.ac.uk/...
+wget -nd -Ogp_registrations.txxt https://biota.ndph.ox.ac.uk/...
+```
 
 # Database creation
 

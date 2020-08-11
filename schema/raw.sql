@@ -2,7 +2,7 @@
 
 CREATE TABLE eids(
   "id" INTEGER PRIMARY KEY,
- "eid" INTEGER
+ "eid" INTEGER UNIQUE ON CONFLICT IGNORE
 );
 
 -- Tables for raw data
@@ -11,10 +11,13 @@ CREATE TABLE gp_registrations_txt(
   "eid" INTEGER,
   "data_provider" INTEGER,
   "reg_date" TEXT,
-  "deduct_date" TEXT
+  "deduct_date" TEXT,
+  UNIQUE (eid, data_provider, reg_date, deduct_date) ON CONFLICT IGNORE
 );
 
+-- track extra record ID to check for unique entries
 CREATE TABLE gp_clinical_txt(
+  "record_id" INTEGER UNIQUE ON CONFLICT IGNORE,
   "eid" INTEGER,
   "data_provider" INTEGER,
   "event_dt" TEXT,
@@ -25,7 +28,9 @@ CREATE TABLE gp_clinical_txt(
   "value3" TEXT
 );
 
+-- track extra record ID to check for unique entries
 CREATE TABLE gp_scripts_txt(
+ "record_id" INTEGER UNIQUE ON CONFLICT IGNORE,
  "eid" INTEGER,
  "data_provider" INTEGER,
  "issue_date" TEXT,
@@ -79,7 +84,7 @@ CREATE TABLE hesin_txt(
   "disdest_uni" INTEGER,
   "disdest" INTEGER,
   "carersi" INTEGER,
-  UNIQUE (eid, ins_index)
+  UNIQUE (eid, ins_index) ON CONFLICT IGNORE
 );
 
 CREATE TABLE hesin_diag_txt(
@@ -91,7 +96,7 @@ CREATE TABLE hesin_diag_txt(
   "diag_icd9_nb" TEXT,
   "diag_icd10" TEXT,
   "diag_icd10_nb" TEXT,
-  UNIQUE (eid, ins_index, arr_index)
+  UNIQUE (eid, ins_index, arr_index) ON CONFLICT IGNORE
 );
 
 CREATE TABLE hesin_oper_txt(
@@ -106,7 +111,7 @@ CREATE TABLE hesin_oper_txt(
   "oper4_nb" TEXT,
   "posopdur" INTEGER,
   "preopdur" INTEGER,
-  UNIQUE (eid, ins_index, arr_index)
+  UNIQUE (eid, ins_index, arr_index) ON CONFLICT IGNORE
 );
 
 CREATE TABLE hesin_psych_txt(
@@ -117,7 +122,7 @@ CREATE TABLE hesin_psych_txt(
   "mentcat" INTEGER,
   "admistat" INTEGER,
   "leglstat" INTEGER,
-  UNIQUE (eid, ins_index)
+  UNIQUE (eid, ins_index) ON CONFLICT IGNORE
 );
 
 CREATE TABLE hesin_maternity_txt(
@@ -135,7 +140,7 @@ CREATE TABLE hesin_maternity_txt(
   "delonset" INTEGER,
   "postdur" INTEGER,
   "matage" INTEGER,
-  UNIQUE(eid, ins_index)
+  UNIQUE(eid, ins_index) ON CONFLICT IGNORE
 );
 
 CREATE TABLE hesin_delivery_txt(
@@ -151,5 +156,5 @@ CREATE TABLE hesin_delivery_txt(
   "sexbaby" INTEGER,
   "birweight" INTEGER,
   "delstat" INTEGER,
-  UNIQUE(eid, ins_index, arr_index)
+  UNIQUE(eid, ins_index, arr_index) ON CONFLICT IGNORE
 );

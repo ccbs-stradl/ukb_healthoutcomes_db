@@ -1,7 +1,4 @@
 #!/bin/sh
-
-# Create database schema
-if [ -f healthoutcomes.db ]; then rm healthoutcomes.db; fi
   
 echo "Creating import schema"
 sqlite3 healthoutcomes.db < schema/raw.sql

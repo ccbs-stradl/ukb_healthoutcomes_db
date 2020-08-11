@@ -9,6 +9,8 @@ PRAGMA foreign_keys = ON;
 -- Main table
 --
 
+BEGIN TRANSACTION;
+
 CREATE TABLE hesin_dsource(
   dsource_id INTEGER PRIMARY KEY,
   dsource TEXT,
@@ -154,11 +156,15 @@ INSERT INTO hesin_data
   LEFT JOIN hesin_mainspef USING (mainspef)
   LEFT JOIN hesin_tretspef USING (tretspef);
 
+DROP TABLE hesin_txt;
+
+COMMIT;
 
 --
 -- ICD Diagnoses
 --
 
+BEGIN TRANSACTION;
 
 CREATE TABLE hesin_diag_icd9(
   diag_icd9_id INTEGER PRIMARY KEY,
@@ -177,7 +183,6 @@ CREATE TABLE hesin_diag_icd10(
 INSERT INTO hesin_diag_icd10
   SELECT DISTINCT NULL, diag_icd10 from hesin_diag_txt
   WHERE diag_icd10 IS NOT '';
-
 
 CREATE TABLE hesin_diag_data(
   id INTEGER,
@@ -209,9 +214,15 @@ INSERT INTO hesin_diag_data
   LEFT JOIN hesin_diag_icd9 USING(diag_icd9)
   LEFT JOIN hesin_diag_icd10 USING(diag_icd10);
 
+DROP TABLE hesin_diag_txt;
+
+COMMIT;
+
 --
 -- Operations
 --
+
+BEGIN TRANSACTION;
 
 CREATE TABLE hesin_oper3(
   oper3_id INTEGER PRIMARY KEY,
@@ -264,6 +275,16 @@ INSERT INTO hesin_oper_data
   LEFT JOIN hesin_oper3 USING(oper3)
   LEFT JOIN hesin_oper4 USING(oper4);
 
+DROP TABLE hesin_oper_txt;
+
+COMMIT;
+
+
+--
+-- Psychiatric
+--
+
+BEGIN TRANSACTION;
 
 CREATE TABLE hesin_psych_data(
   id INTEGER,
@@ -275,12 +296,7 @@ CREATE TABLE hesin_psych_data(
   leglstat INTEGER,
   UNIQUE (id, ins_index)
   FOREIGN KEY (id) REFERENCES eids(id)
-);
-
-
---
--- Psychiatric
---
+); 
 
 INSERT INTO hesin_psych_data
 SELECT
@@ -293,9 +309,15 @@ FROM
 hesin_psych_txt
 LEFT JOIN eids USING(eid);
 
+DROP TABLE hesin_psych_txt;
+
+COMMIT;
+
 --
 -- Maternity
 --
+
+BEGIN TRANSACTION;
 
 CREATE TABLE hesin_maternity_data(
   id INTEGER,
@@ -327,10 +349,15 @@ FROM
 hesin_maternity_txt
 LEFT JOIN eids USING(eid);
 
+DROP TABLE hesin_maternity_txt;
+
+COMMIT;
 
 --
 -- Delivery
 --
+
+BEGIN TRANSACTION;
 
 CREATE TABLE hesin_delivery_data(
   id INTEGER,
@@ -366,14 +393,6 @@ delstat
 FROM hesin_delivery_txt
 LEFT JOIN eids USING(eid);
 
-
----
---- Clean up raw data
----
-
-DROP TABLE hesin_txt;
-DROP TABLE hesin_diag_txt;
-DROP TABLE hesin_oper_txt;
-DROP TABLE hesin_psych_txt;
-DROP TABLE hesin_maternity_txt;
 DROP TABLE hesin_delivery_txt;
+
+COMMIT;

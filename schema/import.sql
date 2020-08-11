@@ -6,9 +6,11 @@
 -- pipe the files through tail to remove the header column
 .import '| tail -n +2 gp_registrations.txt' gp_registrations_txt
 
-.import '| tail -n +2 gp_clinical.txt' gp_clinical_txt
+-- add extra record IDs based on row number since entries are not unique
+.import "| tail -n +2 gp_clinical.txt | awk -v OFS='\t' '{print NR, $0}'" gp_clinical_txt
 
-.import '| tail -n +2 gp_scripts.txt' gp_scripts_txt
+-- add extra record IDs based on row number since entries are not unique
+.import "| tail -n +2 gp_scripts.txt | awk -v OFS='\t' '{print NR, $0}'" gp_scripts_txt
 
 .import '| tail -n +2 hesin.txt' hesin_txt
 

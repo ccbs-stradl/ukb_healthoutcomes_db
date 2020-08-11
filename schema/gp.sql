@@ -6,6 +6,8 @@ PRAGMA foreign_keys = ON;
  -- GP Registrations
  --
 
+BEGIN TRANSACTION;
+
 CREATE TABLE gp_registrations_data(
   "id" INTEGER,
   "data_provider" INTEGER,
@@ -27,9 +29,15 @@ FROM
 gp_registrations_txt
 LEFT JOIN eids USING (eid);
 
+DROP TABLE gp_registrations_txt;
+
+COMMIT;
+
 --
 -- GP Clinical Records
 --
+
+BEGIN TRANSACTION;
 
 -- Read codes
 CREATE TABLE gp_clinical_read_2(
@@ -59,6 +67,7 @@ WHERE read_3 IS NOT '';
 
 -- Clinical data
 -- Hold clinical data with references to EIDs and read codes
+
 CREATE TABLE gp_clinical_data(
   id INTEGER,
   data_provider INTEGER,
@@ -87,9 +96,15 @@ LEFT JOIN eids USING (eid)
 LEFT JOIN gp_clinical_read_2 USING (read_2)
 LEFT JOIN gp_clinical_read_3 USING (read_3);
 
+DROP TABLE gp_clinical_txt;
+
+COMMIT;
+
 --
 -- GP Prescribing Records
 --
+
+BEGIN TRANSACTION;
 
 -- Read, BNF, and DM+D codes and drug names
 
@@ -187,10 +202,9 @@ LEFT JOIN gp_scripts_dmd_code USING (dmd_code)
 LEFT JOIN gp_scripts_drug_name USING (drug_name)
 LEFT JOIN gp_scripts_codes USING (read_2_id, bnf_code_id, dmd_code_id, drug_name_id);
 
----
---- Clean up raw data
----
-
-DROP TABLE gp_registrations_txt;
-DROP TABLE gp_clinical_txt;
 DROP TABLE gp_scripts_txt;
+
+COMMIT;
+
+
+

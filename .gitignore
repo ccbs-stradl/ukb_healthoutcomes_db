@@ -3,3 +3,4 @@
 *.db
 *.pdf
 *.zip
+logs/*

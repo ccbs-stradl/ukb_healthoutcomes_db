@@ -123,28 +123,28 @@ CREATE TABLE hesin_data(
 INSERT INTO hesin_data
   SELECT
   id, ins_index, dsource_id, source,
-  	date(substr(epistart, 1, 4) || '-' ||
-  	     substr(epistart, 5, 2) || '-' ||
-  	     substr(epistart, 7, 2)) AS epistart,
-  	date(substr(epiend, 1, 4) || '-' ||
-  		   substr(epiend, 5, 2) || '-' ||
-  		   substr(epiend, 7, 2)) AS epiend,
+  	date(substr(epistart, 7, 4) || '-' ||
+	  	 substr(epistart, 4, 2) || '-' ||
+	  	 substr(epistart, 1, 2)) AS epistart,
+  	date(substr(epiend, 7, 4) || '-' ||
+		 substr(epiend, 4, 2) || '-' ||
+		 substr(epiend, 1, 2)) AS epiend,
   epidur, bedyear, epistat, epitype, epiorder,
   spell_index, spell_seq, spelbgin, spelend, speldur,
   pctcode_id, gpprpct_id, category,
-  	date(substr(elecdate, 1, 4) || '-' ||
-  	     substr(elecdate, 5, 2) || '-' ||
-  	     substr(elecdate, 7, 2)) AS elecdate,
+  	date(substr(elecdate, 7, 4) || '-' ||
+		 substr(elecdate, 4, 2) || '-' ||
+		 substr(elecdate, 1, 2)) AS elecdate,
   	elecdur,
-  	date(substr(admidate, 1, 4) || '-' ||
-         substr(admidate, 5, 2) || '-' ||
-         substr(admidate, 7, 2)) AS admidate,
+  	date(substr(admidate, 7, 4) || '-' ||
+		 substr(admidate, 4, 2) || '-' ||
+		 substr(admidate, 1, 2)) AS admidate,
   admimeth_uni, admimeth, admisorc_uni, admisorc,
   firstreg, classpat_uni, classpat_id, intmanag_uni, intmanag,
   mainspef_uni, mainspef_id, tretspef_uni, tretspef_id, operstat,
-  	date(substr(disdate, 1, 4) || '-' ||
-  		   substr(disdate, 5, 2) || '-' ||
-  		   substr(disdate, 7, 2)) AS disdate,
+  	date(substr(disdate, 7, 4) || '-' ||
+		 substr(disdate, 4, 2) || '-' ||
+		 substr(disdate, 1, 2)) AS disdate,
   dismeth_uni, dismeth, disdest_uni, disdest, carersi
   FROM
   hesin_txt

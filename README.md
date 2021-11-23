@@ -8,9 +8,11 @@ The health outcomes data tables in UKB can each be upwards of 4GB in size and th
 
 ### Updates
 
+- Nov 23 2021: Update parsing of dates in the `hesin` table which used to be stored coded `DDMMYYYY` but are now coded as `DD/MM/YYYY`.
+
 - Aug 11 2020: Added uniqueness checks during data import and transactional commits to main relational tables to handle the database creation being interrupted and restarted.
 
-- Aug 10 2020: Database schema has been [normalised](https://en.wikipedia.org/wiki/Database_normalization) which shoud make many queries a lot faster, particularly those that involve searching text fields. It also decreases the size of the database by about 7GB.
+- Aug 10 2020: Database schema has been [normalised](https://en.wikipedia.org/wiki/Database_normalization) which should make many queries a lot faster, particularly those that involve searching text fields. It also decreases the size of the database by about 7GB.
 
 ## List of database tables
 
